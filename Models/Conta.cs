@@ -1,4 +1,5 @@
-﻿using System;
+﻿using Financial.Models.Enum;
+using System;
 using System.Collections.Generic;
 using System.Text;
 
@@ -10,12 +11,7 @@ namespace Financial.Models
         public int ID { get; set; }
         public string Usuario { get; set; }
         public string PacoteServico { get; set; }
-        #endregion
-
-        #region Contrutores
-        public Conta()
-        {
-        }
+        public TipoConta TipoConta { get; set; }
         #endregion
 
         #region Métodos
@@ -29,7 +25,5 @@ namespace Financial.Models
             throw new NotImplementedException();
         }
         #endregion
-
-
     }
 }
