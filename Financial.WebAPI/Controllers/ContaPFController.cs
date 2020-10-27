@@ -4,7 +4,6 @@ using System.Linq;
 using System.Threading.Tasks;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
-using Microsoft.AspNetCore.Mvc.ViewFeatures;
 using Microsoft.Extensions.Logging;
 
 // For more information on enabling Web API for empty projects, visit https://go.microsoft.com/fwlink/?LinkID=397860
@@ -107,7 +106,7 @@ namespace Financial.WebAPI.Controllers
         }
 
         /// <summary>
-        /// Métod que remove um item da lista, filtrado pelo id
+        /// Método que remove um item da lista, filtrado pelo id
         /// </summary>
         /// <param name="idParam"></param>
         /// <returns></returns>
@@ -132,7 +131,7 @@ namespace Financial.WebAPI.Controllers
                 else
                     throw new Exception();
             }
-            catch (Exception)
+            catch (Exception e)
             {
                 return NotFound();
             }
@@ -150,13 +149,15 @@ namespace Financial.WebAPI.Controllers
                 NomeCompleto = Nome[rng.Next(Nome.Length)],
             })
             .ToList();
+
             lista.Add(new ContaPF
             {
-                Agencia = 1235,
-                Conta = 123457,
+                Agencia = 1234,
+                Conta = 123456,
                 TipoConta = TipoConta[rng.Next(TipoConta.Length)],
-                NomeCompleto = "José Maria de Souza e Albuquerque de Medeiros e Sá"
+                NomeCompleto = "1, 2, 3 da Silva 4"
             });
+
             var id = 1;
             foreach (var item in lista)
             {
@@ -170,25 +171,37 @@ namespace Financial.WebAPI.Controllers
 
 
 
-        // 1. Web Method para retornar a quantidade de items da minha lista
+        // 1. Web Method (endpoint) para retornar a quantidade de items da minha lista
+        ///<summary>
+        ///Método ou endpoint que tem por finalidade retornar o totalizador de contas
+        ///</summary>
+        ///<returns></returns>
+        [HttpGet]
+        [Route("count")]
+        public int GetQuantidade()
+        {
+            return GerarLista().Count();
+        }
 
         // 2. Web Method para retornar o ultimo item (conta) da minha lista de contas
-
+        [HttpGet]
+        [Route("last")]
+        public ContaPF GetUltimo() 
+        {
+            return GerarLista().LastOrDefault();
+        }
+ 
         // 3. Web Method Patch, para atualizar Nome Completo
 
         // 4. Método privado pra validar todas as propriedades estão sendo todas inseridas, menos o Id
 
         // 5. Web Method retornando a lista, ordenada por ordem alfabética, com relação ao nome (logo o Id poderá não ficar ordenado)
+        [HttpGet]
+        [Route("order-by-name")]
+        public IOrderedEnumerable<ContaPF> GetOrderByName()
+        {
+            return GerarLista().OrderBy(conta => conta.NomeCompleto);
+        }
 
-
-
-
-
-
-        // POST api/<ContaPFController>
-        //[HttpPost]
-        //public void Post([FromBody] string value)
-        //{
-        //}
     }
 }
