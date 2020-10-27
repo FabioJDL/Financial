@@ -186,9 +186,9 @@ namespace Financial.WebAPI.Controllers
 
 
         // POST api/<ContaPFController>
-        [HttpPost]
-        public void Post([FromBody] string value)
-        {
-        }
+        //[HttpPost]
+        //public void Post([FromBody] string value)
+        //{
+        //}
     }
 }

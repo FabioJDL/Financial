@@ -77,7 +77,6 @@ namespace Financial.WebAPI
             app.UseSwaggerUI(c =>
             {
                 c.SwaggerEndpoint("/swagger/v1/swagger.json", "Financial");
-                //c.RoutePrefix = string.Empty;
             });
 
             app.UseRouting();
