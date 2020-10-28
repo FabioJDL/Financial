@@ -19,6 +19,10 @@
 
   <ItemGroup>
 	<ProjectReference Include="..\Application\Financial.Application.csproj" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <Folder Include="Models\" />
   </ItemGroup>	
 
 
